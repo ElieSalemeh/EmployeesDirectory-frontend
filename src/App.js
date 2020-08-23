@@ -1,26 +1,55 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+
+// Routing
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+
+// UI Components
+import { Typography, Container, Divider } from '@material-ui/core';
+
+import EmployeesRecordsContainer from './containers/EmployeesRecords/EmployeesRecords-container';
+import EmployeesProfileContainer from './containers/EmployeesProfile/EmployeesProfile-container';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container maxWidth="xl" className="Root-Container">
+      <Typography variant="h3" className="Root-Title">
+        Employees Directory
+    </Typography>
+
+
+      <div className="Header-divider">
+        <Divider />
+      </div>
+
+      <Switch>
+        <Route exact path="/employees">
+          <EmployeesRecordsContainer />
+        </Route>
+        <Route exact path="/employees/profile">
+          <EmployeesProfileContainer />
+        </Route>
+        <Route exact path="/employees/:id/profile">
+          <EmployeesProfileContainer />
+        </Route>
+        <Route exact path="/">
+          <Redirect to="/employees" />
+        </Route>
+        <Route path="*">
+          <Redirect to="/employees" />
+        </Route>
+      </Switch>
+
+    </Container>
+
   );
 }
 
-export default App;
+export default function () {
+  return (
+    <Router>
+      <App />
+    </Router>
+  );
+}
