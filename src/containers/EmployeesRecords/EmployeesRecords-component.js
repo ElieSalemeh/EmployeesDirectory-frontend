@@ -27,7 +27,6 @@ const EmployeesRecordsComponent = (props) => {
     );
   }
 
-
   const renderTablePagination = () => {
     return (
       <TablePagination

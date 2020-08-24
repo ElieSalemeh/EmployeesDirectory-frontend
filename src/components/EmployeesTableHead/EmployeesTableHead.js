@@ -10,7 +10,7 @@ const EmployeesTableHead = (props) => {
     <TableHead>
       <TableRow>
         {titleCells.map(titleCell => (
-          <TableCell key={titleCell.id}>{titleCell.label}</TableCell>
+          <TableCell key={titleCell.id} style={{fontWeight: 'bold'}}>{titleCell.label}</TableCell>
         ))}
       </TableRow>
     </TableHead>

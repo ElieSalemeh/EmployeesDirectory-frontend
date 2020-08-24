@@ -9,6 +9,9 @@ import { useStyles } from './styles';
 import { Grid, Paper, TextField, Container, Button, Snackbar } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 
+// Title Cells data
+import { titleCells } from '../../titleCells';
+
 const EmployeesProfileComponent = (props) => {
   const { employeeData, onDataChange, onSubmit } = props;
   const classes = useStyles();
@@ -17,15 +20,6 @@ const EmployeesProfileComponent = (props) => {
   // Error Alert on submission
   const [emptyAlert, setEmptyAlert] = useState(false);
 
-  // Temporary Cells Data
-  const [titleCells] = useState([
-    { id: 'firstName', label: 'First Name' },
-    { id: 'lastName', label: 'Last Name' },
-    { id: 'phoneNumber', label: 'Phone Number', type: 'number' },
-    { id: 'jobTitle', label: 'Job Title' },
-    { id: 'department', label: 'Department' },
-    { id: 'address', label: 'Address' },
-  ]);
 
   // Get Values of the key properties 
   const getKeyValue = (id) => {
@@ -48,7 +42,7 @@ const EmployeesProfileComponent = (props) => {
   }
 
   const onSaveClicked = () => {
-    if (inputsNotEmpty()) { 
+    if (inputsNotEmpty()) {
       onSubmit();
       history.goBack();
     } else {
