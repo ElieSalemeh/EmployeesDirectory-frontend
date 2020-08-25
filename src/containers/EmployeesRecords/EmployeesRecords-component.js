@@ -4,23 +4,27 @@ import React from 'react';
 import { Table, TableBody, Paper, TableContainer, TablePagination } from '@material-ui/core';
 
 // Components
-import EmployeesRow  from '../../components/EmployeesRow/EmployeesRow';
+import EmployeesRow from '../../components/EmployeesRow/EmployeesRow';
 import EmployeesTableHead from '../../components/EmployeesTableHead/EmployeesTableHead';
 import EmployeesToolbar from '../../components/EmployeesToolbar/EmployeesToolbar';
 
 
 
 const EmployeesRecordsComponent = (props) => {
-  const { titleCells, records, count, page, pageSize, changePageHandler, changePageSizeHandler } = props;
+  const { titleCells, records, count, page, pageSize,
+    changePageHandler, changePageSizeHandler,
+    deleteEmployee, onSearch } = props;
+
 
   const renderTableBody = () => {
     return (
       <TableBody>
         {records.map(employeeRec => (
           <EmployeesRow
-          titleCells={titleCells}
-          key={employeeRec._id}
-          employeeRec={employeeRec}
+            titleCells={titleCells}
+            key={employeeRec._id}
+            employeeRec={employeeRec}
+            onDelete={deleteEmployee}
           />
         ))}
       </TableBody>
@@ -43,7 +47,7 @@ const EmployeesRecordsComponent = (props) => {
 
   return (
     <Paper>
-      <EmployeesToolbar />
+      <EmployeesToolbar searchInput={onSearch} />
       <TableContainer>
         <Table>
           <EmployeesTableHead titleCells={titleCells} />

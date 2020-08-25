@@ -11,6 +11,8 @@
   margin-bottom: 1rem;
 }
 
-.Link-Active p {
-  font-weight: bold;
+.Nav-Link {
+  text-decoration: none;
+  cursor: pointer;
+  color: black;
 }

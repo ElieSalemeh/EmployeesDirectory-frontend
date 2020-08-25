@@ -28,25 +28,27 @@ const EmployeesRecordContainer = (props) => {
 	// Error State 
 	const [error, setError] = useState(false);
 
-	useEffect(() => {
-		const getData = async () => {
-			// Get and set employees rows count 
-			try {
-				const count = await axios.get('/countEmployees');
+	// Get and set employees rows count 
+	const getData = async () => {
+		try {
+			const count = await axios.get('/countEmployees');
+			if (count.data?.count) {
 				setRowsCount(count.data.count);
+			}
 
-				// Get and set employees Data 
-				const results = await axios.get(`/allEmployees/${page}/${pageSize}`);
-				if (results.data?.employees) {
-					setRecords(results.data.employees);
-				}
-			} catch (error) {
-				setError(true);
-			};
-
+			// Get and set employees Data 
+			const results = await axios.get(`/allEmployees/${page}/${pageSize}`);
+			if (results.data?.employees) {
+				setRecords(results.data.employees);
+			}
+		} catch (error) {
+			setError(true);
 		};
+	};
 
+	useEffect(() => {
 		getData();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [page, pageSize]);
 
 
@@ -59,9 +61,40 @@ const EmployeesRecordContainer = (props) => {
 		setPage(0);
 	};
 
-	// Add additional ids for title cells used in Employees Row Comp
-	const tCellsModified = [...titleCells, {id: '', label: ''}]
+	// Add additional ids for title cells used in Employees Row Component
+	const tCellsModified = [...titleCells, { id: 'edit', label: '' }, { id: 'delete', label: '' }]
 
+	// Delete Employee when delete icon is clicked 
+	const deleteEmployee = async (employeeId) => {
+		try {
+			const deleted = await axios.delete(`/employee/${employeeId}`);
+			if (deleted.status === 200) {
+				// Update employee records after delete
+				getData();
+			}
+		} catch (error) {
+			setError(true);
+		};
+	}
+
+	// Get Records on Search
+	const onSearch = async (event) => {
+		let value = '';
+		if (event.target.value) {
+			value = event.target.value;
+			try {
+				const results = await axios.get(`/searchEmployees/${value}`);
+				if (results.data?.results) {
+					setRecords(results.data.results);
+				}
+			} catch (error) {
+				setError(true);
+			};
+		}else {
+			// if Search is empty get data again
+			getData();
+		}
+	}
 
 	if (!error) {
 		return (
@@ -73,6 +106,8 @@ const EmployeesRecordContainer = (props) => {
 				pageSize={pageSize}
 				page={page}
 				count={rowsCount}
+				deleteEmployee={deleteEmployee}
+				onSearch={onSearch}
 			/>
 		);
 	} else {

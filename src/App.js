@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 
 // Routing
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect, NavLink } from "react-router-dom";
 
 // UI Components
 import { Typography, Container, Divider } from '@material-ui/core';
@@ -14,9 +14,11 @@ import EmployeesProfileContainer from './containers/EmployeesProfile/EmployeesPr
 function App() {
   return (
     <Container maxWidth="xl" className="Root-Container">
-      <Typography variant="h3" className="Root-Title">
-        Employees Directory
-    </Typography>
+      <NavLink to={`/employees`} className="Nav-Link">
+        <Typography variant="h3" className="Root-Title">
+          Employees Directory
+        </Typography>
+      </NavLink>
 
 
       <div className="Header-divider">
