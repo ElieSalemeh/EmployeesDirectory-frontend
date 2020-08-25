@@ -9,7 +9,7 @@ export const useStyles = makeStyles((theme) =>
         btnMargin: {
             marginRight: theme.spacing(2),
         },
-        noSelection: {
+        addEmployeeBtn: {
             textDecoration: 'none'
         }
     }),

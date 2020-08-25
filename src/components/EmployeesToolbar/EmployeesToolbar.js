@@ -27,7 +27,7 @@ const EmployeesToolbar = (props) => {
           />
         </div>
         <div>
-          <NavLink to={`/employees/profile`} className={classes.noSelection}>
+          <NavLink to={`/employees/profile`} className={classes.addEmployeeBtn}>
             <Button variant="outlined" color="primary" >
               + Add Employee
           </Button>
