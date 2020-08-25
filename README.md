@@ -24,6 +24,6 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 
 
-### `Database URL`
+### `APIs Endpoint URL`
 
 Available inside axios-employees.js instance.
